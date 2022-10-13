@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            vertical-align: middle;
+        }
+
+        .right {
+            color: green;
+        }
+
+        .wrong {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <button>hello</button>
+    <input id="ipt" type="text"><span>请输入用户名</span>
+    <ul>
+        <li>榴莲</li>
+        <li>股那头</li>
+        <li>臭豆腐</li>
+        <li>猪蹄</li>
+    </ul>
+    <script>
+        var button = document.querySelector('button');
+        var input = document.querySelector('#ipt');
+        var span = document.querySelector('span');
+        var ul = document.querySelector('ul');
+        var lis = ul.querySelectorAll('li');
+        //filter和foreach的return不会终止循环
+
+        // var arr = ['A', '', 'B', undefined, null, 'C', ' '];
+        // var arr = ['A', 'B', 'C', 'D', 'A', 'D', 'B'];
+        // var r = arr.filter((value, index, self) => {
+        //     console.log(this);
+        //     // return value && value.trim();//数组去空字符串
+        //     return self.indexOf(value) === index;
+        //     console.log(11);
+        // });
+        // console.log(r);
+
+        // var r = arr.forEach(function (value, index, self) {
+        //     if (value == 'A') {
+        //         return true;//不会终止循环
+        //     }
+        //     console.log(11);//打印5次
+        // });
+        // var r = arr.some(function (value, index, self) {
+        //     if (value == 'A') {
+        //         console.log(value);
+        //         return true;//终止循环
+        //     }
+        //     console.log(11);//不打印
+        // });
+
+        // var arr = [1, 2, 3, 411, 99];
+        // var max = Math.max(...arr);
+        // // var max = Math.max.apply(Math,arr);
+        // console.log(max);
+        // 'use strict';
+
+        // // console.log(this);
+        // function a() {
+        //     console.log(this);
+        // }
+        // a();
+        // setTimeout(function () {
+        //     console.log(this);
+        //     btn.onclick = function () {
+        //         console.log(this);
+        //     }
+        // }, 2000)
+
+        // function f() {
+        //     var num = 10;
+
+        //     return function () {
+        //         console.log(num);//产生闭包
+        //     };
+        // }
+        // var f = f();
+        // f(); //log num = 10;
+
+        // for (var i = 0; i < lis.length; i++) {
+        //     (function (i) {
+        //         setTimeout(function () {
+
+        //             console.log(lis[i].innerHTML);
+        //         }, 1000);
+        //     })(i);
+        // }
+        // for (var i = 0; i < lis.length; i++) {
+        //     //for为同步任务
+        //     //异步队列任务不能直接与var声明的for循环使用，需使用闭包
+        //     (function (i) {
+        //         setTimeout(function () {
+        //             console.log(lis[i].innerHTML);
+        //         }, 3000);
+        //     })(i);
+
+        //     // setTimeout(function () {
+        //     //     console.log(lis[i].innerHTML);
+        //     // }, 2000);//报错
+        // }
+
+        // btn.addEventListener('click', function () {
+        //     var num = input.value;
+
+        // })
+
+
+        // //计算阶乘
+        // function c(n) {
+        //     if (n == 1) {
+        //         return 1;
+        //     }
+        //     return n * c(n - 1);
+        // }
+        // console.log(c(5));
+
+
+        // //计算斐波那契序列
+        // function m(n) {
+        //     if (n == 1 || n == 2) {
+        //         return 1;
+        //     }
+        //     return m(n - 1) + m(n - 2);
+        // }
+        // console.log(m(6));
+
+
+        // var arr1 = [{
+        //     id: 1,
+        //     name: '电器',
+        //     goods: [{
+        //         id: 11,
+        //         name: '冰箱'
+        //     }, {
+        //         id: 12,
+        //         name: '电视'
+        //     }]
+        // },
+        // {
+        //     id: 2,
+        //     name: '游戏',
+        //     goods: [{
+        //         id: 21,
+        //         name: 'PS5'
+        //     }, {
+        //         id: 22,
+        //         name: '电脑'
+        //     }]
+        // }]
+        // var o = {};
+        // function c(obj, n) {
+
+        //     obj.forEach(function (val) {
+        //         if (val.id == n) {
+        //             o = val;
+        //         } else if (val.goods && val.goods.length > 0) {
+        //             c(val.goods, n);
+        //         }
+        //     });
+        //     return o;
+        // }
+        // console.log(c(arr1, 22));
+        // var reg = /^\w{3,16}$/;
+        // input.addEventListener('blur', function () {
+        //     if ((reg.test(input.value))) {
+        //         span.className = 'right';
+        //     } else {
+        //         span.className = 'wrong';
+        //     }
+        // })
+        // function d(w) {
+        //     console.log(w);
+        // }
+        // function c(q) {
+        //     var m = 0;
+        //     let n = 'hello';
+        //     console.log(q);
+        //     console.log(m);
+        //     console.log(n);
+        //     d(m);
+        //     d(n);
+        // }
+        // let a = 10;
+        // var b = 20;
+        // if (true) {
+        //     // a = 5;
+        //     // b = 6;
+        //     let a = 1;
+        //     let b = 2;
+        //     function c(a) {
+        //         console.log(a);
+        //     }
+        //     c(a);
+        //     c(b);
+        //     // c(a);
+        //     // console.log('---');
+        //     // c(b);
+        // }
+        // console.log(b);//正确
+        // console.log(a);//错误
+
+
+        // let obj = { name: 'wang', age: 18, sex: '男' };
+        // let { age, name, sex } = obj;//顺序可以乱，变量名必须一样
+        // console.log(name);
+        // let num = 10
+        // let l = 20;
+        // let arr = [1, 2, 3];
+        // //    ...arr //1,2,3
+        // //...arr相当于获取数组所有元素为参数
+        // console.log(num, l);
+        // console.log(...arr);
+
+        // console.log(lis);
+        // lis = [...lis];//伪数组转真数组
+        // lis.push('a');
+        // console.log(lis);
+
+        // const s1 = [1, 2, 3, 3];
+        // const s2 = new Set(s1);
+        // console.log(s2, s2.size);
+        // var arr1 = [...s2];//转数组
+        // console.log(arr1.length);
+
+        // window.name = '玛卡巴卡';
+        // var o = {
+        //     name: '你好',
+        //     getName: function (param) {
+        //         console.log(this.name);
+        //     }
+        //     // getName: () => {
+        //     //     console.log(this.name);
+        //     // }
+        // }
+        // o.getName();
+
+        // var o = {
+        //     name: 'wang',
+        //     stus: [
+        //         'xiaoming',
+        //         'xiaoning',
+        //         'xiaotian'
+        //     ],
+        //     //对象没有迭代器（iterator），封装一个迭代器，就可以用for of遍历了
+        //     [Symbol.iterator]() {
+        //         let index = 0;
+        //         // let that = this;
+        //         console.log(this);
+        //         return {
+        //             next: () => {
+        //                 console.log(this);
+        //                 if (index < this.stus.length) {
+        //                     const result = { value: this.stus[index], done: false };
+        //                     index++;
+        //                     return result;
+        //                 } else {
+        //                     return { value: undefined, done: true };
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+        // for (var k of o) {
+        //     console.log(k);
+        // }
+        // function one() {
+        //     setTimeout(function () {
+        //         console.log(111);
+        //         iterator.next();
+        //     }, 1000)
+        // }
+        // function two() {
+        //     setTimeout(function () {
+        //         console.log(222);
+        //         iterator.next();
+        //     }, 1000)
+        // }
+        // function three() {
+        //     setTimeout(function () {
+        //         console.log(333);
+        //         iterator.next();
+        //     }, 1000)
+        // }
+        // function* gen() {
+        //     yield one();
+        //     yield two();
+        //     yield three();
+
+        // }
+        // let iterator = gen();
+        // iterator.next();
+        // var str = 'abcd';
+        // var arr = str.split('');//字符串转数组
+        // console.log(arr);
+
+
+        var p = new Promise(function (success, error) {
+            setTimeout(function () {
+                let data = 'right!';
+                let err = 'error!';
+                // success(data);
+                error(err);
+            }, 1000)
+        })
+        p.then(function (date) {
+            console.log(date);
+        }, function (date) {
+            console.log(date);
+        })
+    </script>
+</body>
+
+</html>

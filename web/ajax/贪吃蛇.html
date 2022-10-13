@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+
+        }
+
+        .item {
+            box-sizing: border-box;
+        }
+
+        div {
+            border: 1px solid #ddd;
+        }
+
+        .player {
+            background-color: rgb(154, 247, 239);
+        }
+
+        .eat {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        const cols = 20;//行
+        const rows = 20;//列
+        const size = 30;//格子大小
+        var box = document.querySelector('.box');
+        let arr = [];
+        let key = '';
+        let player = [
+            [1, 1]
+        ];
+
+        //绘制地图
+        for (let i = 0; i < cols; i++) {
+            for (let j = 0; j < rows; j++) {
+                const isEat = Math.random() > 0.9;
+                arr.push(`<div class='item ${isEat ? 'eat' : ''}'
+                 data-index='${i}-${j}' style="width: ${size}px; height:${size}px"></div>`
+                );
+            }
+        }
+        box.style.width = `${cols * size}px`;
+        box.innerHTML = arr.join('');
+        //根据player坐标绘制蛇的位置上
+        const updatePlayer = () => {
+            document.querySelectorAll('.player').forEach(v => v.classList.remove("player"));
+            player.forEach(m => {
+                console.log(document.querySelector(`[data-index="${m.join('-')}"]`));
+                document.querySelector(`[data-index="${m.join('-')}"]`).classList.add("player");
+            })
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key == 'a' || e.key == 's' || e.key == 'w' || e.key == 'd') {
+                key = e.key;//按键名字
+            }
+        });
+        const timer = setInterval(() => {
+            if (key) {
+                //数组为引用类型，这句相当于深拷贝，复制一份数组的数据
+                //必须这样写，否则player中的数值都相同
+                const needPos = JSON.parse(JSON.stringify(player.slice(0, player.length - 1)));
+                // console.log(player.slice(0, player.length - 1));
+                // console.log(needPos);
+                switch (key) {
+                    case 'w': player[0][0] -= 1; break;
+                    case 's': player[0][0] += 1; break;
+                    case 'a': player[0][1] -= 1; break;
+                    case 'd': player[0][1] += 1; break;
+                }
+                const judge = document.querySelector(`div[data-index='${player[0].join('-')}']`);
+                if (!judge) {
+                    clearInterval(timer);
+                    alert('游戏结束');
+                } else {
+                    // console.log(needPos);
+                    for (let i = 1; i < player.length; i++) {
+                        player[i] = needPos[i - 1];
+                    }
+                    console.log(player);
+                    if (judge.className.indexOf("eat") != -1) {
+                        judge.classList.remove("eat");
+                        player.push([...player[0]]);//让蛇长度加1，仅此而已
+
+                    }
+                    updatePlayer();
+                }
+            }
+
+        }, 500);
+        updatePlayer();
+
+    </script>
+
+
+
+</body>
+
+</html>

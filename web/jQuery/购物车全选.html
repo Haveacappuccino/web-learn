@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jQuery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        span,
+        input {
+            display: inline-block;
+            text-align: center;
+            line-height: 15px;
+            width: 40px;
+            height: 20px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        a {
+            font-size: 14px;
+            margin: 0 5px;
+        }
+
+        .current {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="">
+        全选<input class="checkAll" type="checkbox">单价小计
+    </div>
+    <div class="shop">
+        <div class="col">
+            <input class="check" type="checkbox"><span class="price">12.80</span>
+            <span class="sec">-</span><input value="1" class="num" type="text"><span class="add">+</span><span
+                class="total">12.80</span><span class="del">删除</span>
+        </div>
+        <div class="col">
+            <input class="check" type="checkbox"><span class="price">25.00</span>
+            <span class="sec">-</span><input value="2" class="num" type="text"><span class="add">+</span><span
+                class="total">25.00</span><span class="del">删除</span>
+        </div>
+        <div class="col">
+            <input class="check" type="checkbox"><span class="price">15.00</span>
+            <span class="sec">-</span><input value="3" class="num" type="text"><span class="add">+</span><span
+                class="total">15.00</span><span class="del">删除</span>
+        </div>
+    </div>
+    <div>
+        全选<input class="checkAll" type="checkbox"><a class="del_select" href="javascript:;">删除选中商品</a><a class="del_all"
+            href="javascript:;">清空购物车</a>
+        共选择<span class="sum">0</span>件商品,总计<span class="cost">0.00</span>
+    </div>
+    <script>
+        $(function () {//change是我们用鼠标改变时触发
+            function total() {  //总数和总价计算
+                //小计
+                $(".total").each(function (i, dom) {
+                    var price = ($(dom).siblings(".price").text() * $(dom).siblings(".num").val()).toFixed(2);
+                    $(dom).text(price);
+                })
+                //总数总价
+                var sum = 0;
+                var cost = 0;
+                $(".sum").text(sum);
+                $.each($(".check:checked"), function (i, dom) {
+                    sum += parseInt($(dom).siblings(".num").val());
+                    $(".sum").text(sum);
+                    cost += parseFloat($(dom).siblings(".total").text());
+                })
+                $(".cost").text(cost.toFixed(2));
+            }
+            total();
+            $(".checkAll").change(function () {
+                // console.log($(this).prop("checked"));//触发事件打印信息
+                $(".check, .checkAll").prop("checked", $(this).prop("checked"));
+                if ($(this).prop("checked")) {
+                    $(".col").addClass("current");
+                } else {
+                    $(".col").removeClass("current");
+                }
+            })
+            //单选
+            $(".check").change(function () {
+                if ($(".check:checked").length == $(".check").length) {
+                    $(".checkAll").prop("checked", true);
+                } else {
+                    $(".checkAll").prop("checked", false);
+                }
+                $(this).parent(".col").toggleClass("current");
+            })
+            $("input").change(total);
+            $(".sec").click(function () {
+                var num = $(this).siblings(".num").val();
+                if (num <= 1) {
+                    return false;
+                }
+                num--;
+                $(this).siblings(".num").val(num);
+                total();
+            })
+            $(".add").click(function () {
+                // console.log($(this).siblings(".num").text());
+                var num = $(this).siblings(".num").val();
+                num++;
+                $(this).siblings(".num").val(num);
+                total();
+            })
+            $(".del").click(function () {
+                $(this).parents(".col").remove();
+                total();
+            })
+            $(".del_select").click(function () {
+                $(".check:checked").parents(".col").remove();
+                total();
+            })
+            $(".del_all").click(function () {
+                $(".shop").remove();
+                $(".checkAll").prop("checked", false);
+                total();
+            })
+        })
+    </script>
+</body>
+
+</html>

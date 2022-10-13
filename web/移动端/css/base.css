@@ -1,0 +1,27 @@
+* {
+  /* css3盒子模型 */
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  /* 点击高亮清除 设置透明*/
+  -webkit-tap-highlight-color: transparent;
+  /* 清楚默认样式 */
+  -webkit-appearance: none;
+  /* 禁用长按页面弹出菜单 */
+}
+img,
+a {
+  -webkit-touch-callout: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon.eot?tpdjba');
+  src: url('../fonts/icomoon.eot?tpdjba#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?tpdjba') format('truetype'), url('../fonts/icomoon.woff?tpdjba') format('woff'), url('../fonts/icomoon.svg?tpdjba#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}

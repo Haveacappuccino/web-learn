@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            position: absolute;
+            background-color: #ccc;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: url(./images/tabbar.png) no-repeat center top;
+            background-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <span></span>
+    <script>
+        var timer = null;
+        var span = document.querySelector('span')
+        document.addEventListener('mousemove', function (e) {
+            // console.log(e.pageX, e.pageY);
+            if (timer) {
+                return
+            }
+            timer = setTimeout(function () {
+                span.style.top = e.pageY + 'px';
+                span.style.left = e.pageX + 'px';
+                timer = null;
+            }, 20)
+        })
+    </script>
+</body>
+
+</html>

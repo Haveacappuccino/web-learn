@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .small,
+        .big {
+            border: 1px solid #ccc;
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+        }
+
+        .small .sml {
+            display: none;
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            opacity: .5;
+        }
+
+        .big {
+            display: none;
+            left: 20%;
+            width: 300px;
+            height: 300px;
+        }
+        .bigImg {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="small">
+        <img src="ios/图层7.png">
+        <div class="sml"></div>
+    </div>
+    <div class="big">
+        <img src="ios/图层7@3x.png" class="bigImg">
+    </div>
+    <script>
+        var small = document.querySelector('.small');
+        var big = document.querySelector('.big');
+        var sml = document.querySelector('.sml');
+        small.addEventListener('mouseover', function () {
+            sml.style.display = 'block';
+            big.style.display = 'block';
+        })
+        small.addEventListener('mouseout', function () {
+            sml.style.display = 'none';
+            big.style.display = 'none';
+        })
+        small.addEventListener('mousemove',function (e) {
+            // 遮盖盒跟随鼠标中心的坐标
+            var smlX = e.pageX - this.offsetLeft - sml.offsetWidth / 2;
+            var smlY = e.pageY - this.offsetTop - sml.offsetHeight / 2;
+            // console.log(x,y);
+            // 遮盖盒可移动最大距离
+            var smlMaxX = small.offsetWidth - sml.offsetWidth;
+            var smlMaxY = small.offsetHeight - sml.offsetHeight;
+            if (smlX <= 0) {
+                smlX = 0;
+            }else if (smlX >= smlMaxX) {
+                smlX = small.offsetWidth - sml.offsetWidth;
+            }
+            if (smlY <= 0) {
+                smlY = 0;
+            }else if (smlY >= smlMaxY) {
+                smlY = small.offsetHeight - sml.offsetHeight;
+            }
+            sml.style.left = smlX + 'px';
+            sml.style.top = smlY + 'px';
+            var bigImg = document.querySelector('.bigImg');
+            // 大图片可移动最大距离
+            var bigMaxX = bigImg.offsetWidth - big.offsetWidth;
+            var bigMaxY = bigImg.offsetHeight - big.offsetHeight;
+            // 大图片定位坐标
+            var bigX = smlX * bigMaxX / smlMaxX;
+            var bigY = smlY * bigMaxY / smlMaxY;
+            bigImg.style.left = -bigX + 'px';
+            bigImg.style.top = -bigY + 'px';
+          })
+    </script>
+</body>
+
+</html>

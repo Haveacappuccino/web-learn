@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        div {
+            width: 200px;
+            height: 200px;
+            border: 10px solid #ccc;
+            
+        }
+    </style>
+</head>
+<body>
+      <div>hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+        hello world
+      </div>
+      <script>
+        var div = document.querySelector('div')
+        //1.获取自身高度，包含padding、border
+        //offsetTop获取距离带定位父级的高度
+        console.log(div.offsetHeight)
+        //2.获取自身高度，包含padding、不包含border
+        //clientTop获取上边框大小
+        console.log(div.clientHeight)
+        //2.获取自身实际内容高度(溢出部分也算)，包含padding、不包含border
+        //scrollTop获取该元素滚动条卷曲的长度，配合overflow：auto使用
+        console.log(div.scrollHeight)
+      </script>
+</body>
+</html>

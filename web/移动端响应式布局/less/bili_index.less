@@ -1,0 +1,191 @@
+@import "base.less";
+//引入样式
+@Width: 3.75vw;
+@Height: 6.67vh;
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 999;
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: (70 / @Height);
+        border: 1px solid #ccc;
+        padding: 0 (12 / @Height) 0 (18/@Height);
+
+        &>a {
+            i {
+                font-size: (38 / @Height);
+                color: rgb(245, 161, 175);
+            }
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+
+            .search {
+                i {
+                    font-size: (28/@Height);
+                }
+            }
+
+            .face {
+                margin: 0 (25/@Height);
+
+                img {
+                    width: (30/@Height);
+                    vertical-align: middle;
+                    border-radius: 50%;
+                }
+            }
+
+            .download {
+                font-size: (18/@Height);
+                padding: (5/@Height) (12/@Height);
+                border-radius: (5/@Height);
+                background-color: rgb(254, 143, 162);
+                color: #fff;
+            }
+        }
+    }
+
+    .bottom {
+        position: relative;
+        display: flex;
+        // justify-content: space-between;
+        height: (40/@Height);
+        border-bottom: (1/@Height) solid #ccc;
+
+        ul {
+            display: flex;
+            overflow: hidden;
+
+            li {
+                display: flex;
+                padding: 0 (20/@Height);
+
+                a {
+                    min-width: (50/@Height);
+                    color: #000;
+                    font-size: (18/@Height);
+                    line-height: (38/@Height);
+                    padding: 0 (5/@Height);
+
+                    &.a_current {
+                        color: pink;
+                        border-bottom: (3/@Height) solid pink;
+                    }
+                }
+            }
+        }
+
+        .more {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: (40/@Height);
+            height: 100%;
+            text-align: center;
+            z-index: 1;
+            background-color: #fff;
+
+            a {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                padding: (10/@Height) (10/@Height) 0;
+
+                i {
+                    font-size: (20/@Height);
+                }
+            }
+
+
+        }
+    }
+}
+
+.main {
+    .tab {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        border: 1px solid #f67ada;
+        background-color: #fff;
+        margin-top: (110/@Height);
+        padding: 0 (10/@Width);
+
+        a {
+            flex: 50%;
+            padding: (10/@Height);
+            border: 1px solid #ada63a;
+
+            .video {
+                position: relative;
+                width: 100%;
+                height: (97/@Width);
+                border: 1px solid #f67ada;
+
+                .picture {
+                    width: 100%;
+                    height: 100%;
+                    background: url(../images/热门活动.png) no-repeat center bottom;
+                    background-size: 240px;
+                }
+
+                .icon {
+                    display: flex;
+                    position: absolute;
+                    bottom: 0%;
+                    width: 100%;
+                    justify-content: space-between;
+                    height: (28/@Height);
+                    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+                    padding: 0 (5/@Height);
+
+                    i {
+                        display: flex;
+                        color: #fff;
+                        align-items: center;
+
+                        &::after {
+                            content: '3200';
+                            font-size: (12/@Height);
+                        }
+                    }
+                }
+            }
+
+            p {
+                display: -webkit-box; //使文字强制在两行显示必须与这个
+                -webkit-line-clamp: 2; //控制2行
+                text-overflow: ellipsis; //溢出文字显示省略号
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                font-size: (14/@Height);
+                color: #000;
+            }
+        }
+    }
+}
+
+//
+.ellipse_2 {
+    display: -webkit-box; //使文字强制在两行显示必须与这个
+    -webkit-line-clamp: 2; //控制2行
+    text-overflow: ellipsis; //溢出文字显示省略号
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+footer {}
+
+.open_bili {}

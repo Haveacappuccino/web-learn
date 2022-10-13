@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      div {
+         width: 50px;
+         height: 50px;
+         float: left;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="hour">1</div>
+   <div class="minute">2</div>
+   <div class="second">3</div>
+   <script>
+      var inputTime = +new Date('2022-10-1 08:00:00');
+      var hour = document.querySelector('.hour');
+      var minute = document.querySelector('.minute');
+      var second = document.querySelector('.second');
+      countTime();
+      var timer = setInterval(countTime, 1000);
+      function countTime() {
+         var nowTime = +new Date();// .getTime()    .valueOf()  
+         var times = (inputTime - nowTime) / 1000;
+         h = parseInt(times / 60 / 60 % 24);
+         h = h < 10 ? '0' + h : h;
+         hour.innerHTML = h;
+         m = parseInt(times / 60 % 60);
+         m = m < 10 ? '0' + m : m;
+         minute.innerHTML = m;
+         s = parseInt(times % 60);
+         s = s < 10 ? '0' + s : s;
+         second.innerHTML = s;
+      }
+
+      // console.log(countTime('2022-10-1 08:00:00'));
+      // var now = new Date();
+      // console.log(now.getFullYear()); //年
+      // console.log(now.getMonth() + 1); //月
+      // console.log(now.getDate()); //日
+      // console.log(now.getDay()); //星期
+      // console.log(now.getHours()); //时
+      // console.log(now.getMinutes()); //分
+      // console.log(now.getSeconds()); //秒
+   </script>
+</body>
+
+</html>

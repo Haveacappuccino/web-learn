@@ -1,0 +1,173 @@
+* {
+  /* css3盒子模型 */
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  /* 点击高亮清除 设置透明*/
+  -webkit-tap-highlight-color: transparent;
+  /* 清楚默认样式 */
+  -webkit-appearance: none;
+  /* 禁用长按页面弹出菜单 */
+  margin: 0;
+  padding: 0;
+}
+img,
+a {
+  -webkit-touch-callout: none;
+}
+a {
+  text-decoration: none;
+  color: #ccc;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 999;
+}
+header .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 10.49475262vh;
+  border: 1px solid #ccc;
+  padding: 0 1.79910045vh 0 2.69865067vh;
+}
+header .top > a i {
+  font-size: 5.69715142vh;
+  color: #f5a1af;
+}
+header .top .right {
+  display: flex;
+  align-items: center;
+}
+header .top .right .search i {
+  font-size: 4.19790105vh;
+}
+header .top .right .face {
+  margin: 0 3.74812594vh;
+}
+header .top .right .face img {
+  width: 4.49775112vh;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+header .top .right .download {
+  font-size: 2.69865067vh;
+  padding: 0.74962519vh 1.79910045vh;
+  border-radius: 0.74962519vh;
+  background-color: #fe8fa2;
+  color: #fff;
+}
+header .bottom {
+  position: relative;
+  display: flex;
+  height: 5.9970015vh;
+  border-bottom: 0.14992504vh solid #ccc;
+}
+header .bottom ul {
+  display: flex;
+  overflow: hidden;
+}
+header .bottom ul li {
+  display: flex;
+  padding: 0 2.99850075vh;
+}
+header .bottom ul li a {
+  min-width: 7.49625187vh;
+  color: #000;
+  font-size: 2.69865067vh;
+  line-height: 5.69715142vh;
+  padding: 0 0.74962519vh;
+}
+header .bottom ul li a.a_current {
+  color: pink;
+  border-bottom: 0.44977511vh solid pink;
+}
+header .bottom .more {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 5.9970015vh;
+  height: 100%;
+  text-align: center;
+  z-index: 1;
+  background-color: #fff;
+}
+header .bottom .more a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 1.49925037vh 1.49925037vh 0;
+}
+header .bottom .more a i {
+  font-size: 2.99850075vh;
+}
+.main .tab {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  border: 1px solid #f67ada;
+  background-color: #fff;
+  margin-top: 16.49175412vh;
+  padding: 0 2.66666667vw;
+}
+.main .tab a {
+  flex: 50%;
+  padding: 1.49925037vh;
+  border: 1px solid #ada63a;
+}
+.main .tab a .video {
+  position: relative;
+  width: 100%;
+  height: 25.86666667vw;
+  border: 1px solid #f67ada;
+}
+.main .tab a .video .picture {
+  width: 100%;
+  height: 100%;
+  background: url(../images/热门活动.png) no-repeat center bottom;
+  background-size: 240px;
+}
+.main .tab a .video .icon {
+  display: flex;
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  justify-content: space-between;
+  height: 4.19790105vh;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  padding: 0 0.74962519vh;
+}
+.main .tab a .video .icon i {
+  display: flex;
+  color: #fff;
+  align-items: center;
+}
+.main .tab a .video .icon i::after {
+  content: '3200';
+  font-size: 1.79910045vh;
+}
+.main .tab a p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 2.09895052vh;
+  color: #000;
+}
+.ellipse_2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

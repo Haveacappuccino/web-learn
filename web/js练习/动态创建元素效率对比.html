@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    var body = document.body;
+    // for (var i = 0; i < 1000; i++) {
+    //1.这种方法会重绘页面，不推荐
+    // document.write('<a href="#"></a>');
+     // }
+    // 2.创建多个元素时效率最高(用数组拼接，用字符串拼接最耗时)
+    var arr = [];
+    var front = +new Date();
+    for (var i = 0; i < 1000; i++) {
+        //1.效率奇差 
+        //body.innerHTML += '<a href="#">删除</a>';
+        //2.效率特高
+        arr.push('<a href="#">删除</a>');
+        //3.效率略差
+        // var a = document.createElement('a');
+        // a.href = '#';
+        // a.innerHTML = '删除';
+        // body.appendChild(a);
+    }
+    var now = +new Date();
+    console.log(now - front);
+    body.innerHTML = arr.join('');
+    
+ </script>
+</html>

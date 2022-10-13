@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form1">
+        <input type="text" name="uname" autocomplete="off">名字
+        <input type="password" name="password" autocomplete="off">密码
+        <input type="file" name="ufile" id="file">
+        <input id="submit" type="submit">
+    </form>
+    <script>
+        //提交表单数据
+        var form = document.querySelector('#form1');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            //创建formdata对象,传参表单内容
+            var formdate = new FormData(form);
+            // 创建XML对象
+            var xhr = new XMLHttpRequest()
+
+            xhr.timeout = 3000;
+            xhr.addEventListener('timeout', function () {
+                alert('请求超时！');
+            })
+            // 调用open函数
+            xhr.open('post', 'url链接')
+            //设置content-type属性
+            // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            // 调用send函数
+            xhr.send(formdate)//里面添加参数
+            // 监听事件
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // 服务器已响应
+                    //data获取服务器返回数据
+                    var data = JSON.parse(xhr.responseText);
+                    if (data.status === 200) {
+                        //事件处理函数
+                    } else {
+                        console.log(data.message);
+                    }
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

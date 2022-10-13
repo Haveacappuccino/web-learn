@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 500px;
+            /* border-spacing: 10px; */
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>名字</th>
+                <th>科目</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <a href="javascript:;"></a>
+        <tbody></tbody>
+
+        <script>
+            var dates = [{
+                姓名: '熊大',
+                科目: 'java',
+                成绩: 100
+            },
+            {
+                uname: '熊二',
+                obj: 'java',
+                成绩: 99
+            },
+            {
+                姓名: '熊三',
+                科目: 'java',
+                成绩: 98
+            }]
+            var tbody = document.querySelector('tbody');
+            for (var i = 0; i < dates.length; i++) {
+                var tr = document.createElement('tr');
+                for( var k in dates[i]) {
+                    var td = document.createElement('td');
+                    td.innerHTML = dates[i][k];
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+                //添加删除单元格
+                //js中<a href="javascript:;">代表的是链接不跳转没有#号
+                var td = document.createElement('td');
+                td.innerHTML = '<a href="javascript:;">删除</a>';
+                tr.appendChild(td);//tr的最后面添加
+            }
+            var as = document.querySelectorAll('a');
+            for( var i = 0; i < as.length; i++) {
+                as[i].onclick =function () {
+                    tbody.removeChild(this.parentNode.parentNode);
+                  }
+            }
+        </script>
+    </table>
+</body>
+
+</html>

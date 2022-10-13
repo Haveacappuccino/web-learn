@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面向对象，tab栏切换</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        li {
+            list-style: none;
+
+        }
+
+        #tab {
+            width: 1000px;
+            height: 400px;
+            margin: 200px auto;
+            border: 1px solid #ccc;
+        }
+
+        .head {
+            position: relative;
+            height: 80px;
+            border: 1px solid #ccc;
+        }
+
+        .ul {
+            display: flex;
+            height: 100%;
+        }
+
+        .ul li {
+            display: flex;
+            width: 100px;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: -1px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .ul li .del {
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate(50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: #000;
+            padding-top: 18px;
+            padding-left: 8px;
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        li.tab_current {
+            border-bottom: 0;
+        }
+
+        .head #add {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            transform: translateY(-50%);
+        }
+
+        .text {
+            height: 100%;
+        }
+
+        .text section {
+            display: none;
+            height: 100%;
+        }
+
+        .text section.sec_current {
+            display: block;
+        }
+
+        .text section input {
+            width: 100%;
+            height: 50%;
+        }
+
+        .txt input {
+            width: 80%;
+            margin-left: 10%;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <span>js面向对象，动态添加标签页</span>
+    <div id="tab">
+        <div class="head">
+            <ul class="ul">
+                <li class="tab_current">
+                    <span class="txt">1</span><span class="del">X</span>
+                </li>
+                <li>
+                    <span class="txt">2</span><span class="del">X</span>
+                </li>
+                <li>
+                    <span class="txt">3</span><span class="del">X</span>
+                </li>
+            </ul>
+            <span id="add">+</span>
+        </div>
+        <div class="text">
+            <section class="sec_current">内容1</section>
+            <section>内容2</section>
+            <section>内容3</section>
+
+        </div>
+    </div>
+    <script>
+
+        class Tab {
+            constructor(id) {
+                this.main = document.querySelector(id);
+                this.add = this.main.querySelector("#add");
+                this.text = this.main.querySelector(".text");
+                this.init();
+            }
+            init() {
+                this.getElement();
+                this.add.onclick = this.addTab.bind(this.add, this);
+                for (var i = 0; i < this.lis.length; i++) {
+                    this.lis[i].index = i;
+                    this.lis[i].onclick = this.toggleTab.bind(this.lis[i], this);
+                    //这里toggleTab不能拿加括号，会直接触发的
+                    this.removes[i].onclick = this.removeTab.bind(this.removes[i], this);
+                    this.txts[i].ondblclick = this.editTab;
+                    this.sections[i].ondblclick = this.editTab;
+
+                }
+            }
+            getElement() {
+                this.removes = this.main.querySelectorAll(".del");
+                this.ul = this.main.querySelector(".ul");
+                this.lis = this.main.querySelectorAll("li");
+                this.sections = this.main.querySelectorAll("section");
+                this.txts = this.main.querySelectorAll(".txt");
+            }
+            toggleTab(that) {
+                // console.log(this);
+                that.clearClass();
+                this.className = "tab_current";
+                that.sections[this.index].className = 'sec_current';
+            }
+            clearClass() {
+                for (var i = 0; i < this.lis.length; i++) {
+                    this.lis[i].className = '';
+                    this.sections[i].className = '';
+                }
+            }
+            addTab(that) {
+                that.clearClass();
+                var random = Math.random();
+                var li = '<li class="tab_current"><span class="txt">新选项卡</span><span class="del"> X</></li >';
+                var section = '<section class="sec_current">' + random + '</section>'
+                that.ul.insertAdjacentHTML('beforeend', li);
+                that.text.insertAdjacentHTML('beforeend', section);
+                that.init();
+            }
+            removeTab(that, e) {
+                //阻止事件冒泡（子元素触发父亲事件）
+                e.stopPropagation();
+                var index = this.parentNode.index;
+                console.log(index);
+                that.lis[index].remove();
+                that.sections[index].remove();
+                that.init();//重新获取元素绑定事件
+                //如果删除的是当前选中页面就切换成其他页面，否则不切换
+                if (document.querySelector('.tab_current')) {
+                    return;
+                } else {
+                    if (!index) {//当前索引号是0，就显示后一个，否则显示前一个
+                        that.lis[index] && that.lis[index].click();
+                    } else {
+                        that.lis[--index].click();
+                    }
+                }
+            }
+
+            editTab(e) {
+                //阻止默认事件
+                e.preventDefault();
+                //双击禁止选中文字
+                window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+                this.innerHTML = '<input type="text" value=' + this.innerHTML + '>';
+                var input = this.children[0];
+                input.select();
+                input.onblur = function () {
+                    this.parentNode.innerHTML = this.value;
+                }
+                input.onkeyup = function (e) {
+                    console.log(e.keyCode);
+                    if (e.keyCode === 13) {
+                        this.blur();
+                        // this.parentNode.innerHTML = this.value;
+                    }
+                }
+
+            }
+        }
+        new Tab('#tab');
+    </script>
+</body>
+
+</html>

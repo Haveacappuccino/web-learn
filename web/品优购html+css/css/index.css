@@ -1,0 +1,233 @@
+.bottom {
+    position: relative;
+    height: 465px;
+}
+
+.list {
+    display: inline-block;
+    width: 210px;
+    height: 100%;
+}
+
+.list ul {
+    float: left;
+    width: 210px;
+    height: 100%;
+    font-size: 14px;
+    background-color: #c81623;
+}
+
+.list ul li {
+    padding: 5px 0 5px 10px;
+}
+
+.list ul li a {
+    color: #fff;
+}
+
+.list ul li::after {
+    content: '>';
+    display: block;
+    float: right;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.list ul li:hover {
+    background-color: #fff;
+}
+
+.list ul li:hover a {
+    color: #c81623;
+}
+
+.bigimg {
+    position: absolute;
+    top: 10px;
+    left: 220px;
+    width: 720px;
+    height: 455px;
+    overflow: hidden;
+}
+
+.bigimg>a {
+    display: none;
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 50px;
+    transform: translateY(-50%);
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    color: #fff;
+    background-color: rgb(21, 20, 20,.5);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.bigimg a:last-of-type {
+    right: 0;
+}
+
+.circle {
+    position: absolute;
+    /* space-around平分剩余空间 */
+    /* justify-content: space-around; */
+    bottom: 30px;
+    left: 50%;
+    margin-left: -50px;
+    text-align: center;
+    border-radius: 12.5px;
+    background-color: rgb(235, 235, 235,.6);
+}
+
+.circle ul li {
+    float: left;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    line-height: 15px;
+    margin: 5px 10px;
+    border: 1px solid #fff;
+    
+}
+.current {
+    background-color: rgb(255, 255, 255);
+}
+.bigimg ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2880px;
+    height: 100%;
+    /* transition: all .3s; */
+}
+
+.bigimg ul li {
+    float: left;
+}
+.bigimg ul li img {
+    width: 720px;
+    height: 455px;
+}
+.new {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 250px;
+    height: 455px;
+}
+
+.bottom .new dl {
+    width: 250px;
+    height: 165px;
+    color: #333333;
+    border: 1px solid #f1f1f1;
+}
+
+.bottom .new dl dt {
+    height: 30px;
+    padding-left: 10px;
+    font-size: 14px;
+    line-height: 30px;
+    border-bottom: 1px dotted #ebeaea;
+}
+
+.bottom .new dl dt a {
+    float: right;
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.bottom .new dl dd {
+    padding: 7px 0 0 10px;
+    font-size: 12px;
+}
+
+.bottom .new dl dd h5 {
+    float: left;
+}
+
+.bottom .new ul {
+    width: 250px;
+    height: 210px;
+    border: 1px solid #f1f1f1;
+}
+
+.bottom .new ul li {
+    float: left;
+    height: 70px;
+    width: 25%;
+    text-align: center;
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: #ccc;
+    font-size: 12px;
+}
+
+.bottom .new ul li i {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url(../images/icons.png) no-repeat -16px -15px;
+    margin-top: 10px;
+}
+
+.bottom .new .bargin {
+    height: 75px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.recom {
+    height: 164px;
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 12px;
+}
+
+.recom_lt {
+    float: left;
+    width: 205px;
+    height: 164px;
+    text-align: center;
+    padding-top: 30px;
+    background-color: #000;
+}
+
+.recom_rt {
+    float: left;
+}
+
+.recom_rt ul li {
+    float: left;
+}
+
+.floor {
+    margin-top: 30px;
+}
+
+.like {
+    height: 263px;
+}
+
+.like>p {
+    font-size: 18px;
+}
+
+.like ul {
+    border: 1px solid #ccc;
+}
+
+.like ul li {
+    float: left;
+    width: 199px;
+    height: 230px;
+    padding: 20px 27px 0 27px;
+}
+
+.like_txt h3 {
+    color: #df2d38;
+    font-size: 18px;
+}

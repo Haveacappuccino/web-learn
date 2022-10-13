@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(37, 232, 232);
+        }
+        @keyframes move {
+            0% {
+                left: 0;
+            }
+            100%{
+                /* 移动到屏幕居中的位置 */
+                left: 50%;
+                transform: translate(-50%,0);
+            }
+        }
+        @keyframes bear {
+            0% {
+                background-position-x: 0;
+            }
+            100%{
+                background-position-x: -1600px;
+            }
+        }
+         .bear {
+            position: absolute;
+            left: 0;
+            width: 200px;
+            height: 100px;
+            background: url(bear.png) no-repeat;
+            background-position-x: 0;
+            /* 添加多个动画，用逗号隔开 */
+            /* forwards 停在终点处，infinite 一直循环*/
+            animation: bear 0.8s steps(8) infinite,move 5s linear forwards;
+         }
+    </style>
+</head>
+<body>
+        <div class="bear"></div>
+</body>
+</html>

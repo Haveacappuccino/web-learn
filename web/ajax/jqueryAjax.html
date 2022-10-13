@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jQuery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <button id="btn">get请求</button>
+    <button id="post">提交数据post</button>
+
+    <script>
+        $(function () {
+            var obj =
+                $('#btn').on('click', function () {
+                    $.get('http://www.liulongbin.top:3006/api/getbooks', function (get) {
+                        console.log(get);
+                    })
+                })
+            $('#post').on('click', function () {
+                $.post('http://www.liulongbin.top:3006/api/addbook', {
+                    bookname: "给阿姨来",
+                    author: '杯卡布奇诺',
+                    publisher: '卢某伟出版社'
+                }, function (res) {
+                    console.log(res);
+                })
+            })
+
+        })
+    </script>
+</body>
+
+</html>

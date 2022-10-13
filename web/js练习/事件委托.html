@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>唔西迪西</li>
+        <li>玛卡巴卡</li>
+        <li>无邪</li>
+        <li>嗷嗷的</li>
+        <li>娃娃的</li>
+    </ul>
+    <script>
+        //不是给每个子节点设置监听器，而是给父节点设置监听器，
+        //利用冒泡原理影响每个子节点   e.target
+        var ul = document.querySelector('ul');
+        ul.addEventListener('mouseover', function (e) {
+            // var lis = ul.children;
+            for (var i = 0; i < ul.children.length; i++) {
+                ul.children[i].style.backgroundColor = '';
+            }
+            e.target.style.backgroundColor = 'pink';
+        }, true)
+    </script>
+</body>
+
+</html>

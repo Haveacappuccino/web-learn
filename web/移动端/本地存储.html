@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="../zyMedia-master（视频插件）/zyMedia-master/examples/zy.media.min.css">
+</head>
+
+<body>
+    用户名1：<input id="uname1" type="text"><br>
+    用户名2：<input id="uname2" type="text"><br>
+    <input id="submit" type="submit" value="保存">
+    <input id="remember" type="checkbox">记住用户名
+
+    <script>
+        // localStorage.clear(); //清除数据慎用
+        var uname1 = document.querySelector('#uname1');
+        var uname2 = document.querySelector('#uname2');
+        var submit = document.querySelector('#submit');
+        var remember = document.querySelector('#remember');
+        // checkbox类型的input有事件change
+        remember.addEventListener('change', function () {
+            if (remember.checked) {//是否被选中
+                localStorage.setItem('check', remember.checked);
+            }
+        })
+        remember.checked = localStorage.getItem('check');
+        if (localStorage.getItem('check') && localStorage.getItem('uname')) {
+            uname1.value = localStorage.getItem('uname');
+        }
+        //相同键只能存在一个且只能有一个值
+        submit.addEventListener('click', function () {
+            localStorage.setItem('uname', uname1.value);
+            localStorage.setItem('uname', uname2.value);//最终 键uname 值 uname2.value
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淘宝搜索、优化缓存、搜索框防抖</title>
+    <script src="js/jQuery.min.js"></script>
+    <style>
+        ul {
+            border: 1px solid #ddd;
+            display: none;
+            list-style: none;
+        }
+
+        ul li {
+            cursor: pointer;
+            padding: 10px 5px;
+        }
+
+        ul li:hover {
+            background-color: #ccc;
+        }
+
+        input {
+            width: 200px;
+            height: 50px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text">
+    <ul>
+    </ul>
+    <script>
+        $(function () {
+            var obj = {}
+            var timer = '';
+            function getData(data) {
+                $.ajax({
+                    url: 'https://suggest.taobao.com/sug?q=' + data,
+                    dataType: 'jsonp',
+                    success: function (res) {
+                        console.log(res.result);
+                        obj[data] = res.result;
+                        xuanran(res.result);
+                    }
+                })
+            }
+            //输入框防抖措施
+            function fangdou(val) {
+                timer = setTimeout(() => {
+                    getData(val);
+                }, 500);
+            }
+            //将搜索提示词渲染到页面
+            function xuanran(res) {
+                $('ul').empty().hide();
+                for (var key in res) {
+                    $('ul').show().append('<li>' + res[key][0] + '</li>');
+                }
+            }
+            $('input').keyup(function () {
+                clearInterval(timer);
+                var iptInner = $(this).val().trim();
+                // console.log(iptInner);
+                if (iptInner.length <= 0) {
+                    return $('ul').empty().hide();
+                }
+                if (obj[iptInner]) {
+                    return xuanran(obj[iptInner]);
+                }
+                fangdou(iptInner);
+            })
+
+        })
+
+    </script>
+</body>
+
+</html>

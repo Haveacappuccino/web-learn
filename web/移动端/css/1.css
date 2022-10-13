@@ -1,0 +1,12 @@
+body {
+  height: 1000px;
+}
+.box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 53.33333333vw;
+  height: 29.9850075vh;
+  margin: 100px auto;
+  background-color: pink;
+}

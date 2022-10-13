@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="fullpage.min.css">
+    <script src="jQuery.min.js"></script>
+    <script src="fullPage.min.js"></script>
+    <script>
+        $(function () {
+            $('#dowebok').fullpage({
+                sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90'],
+                // 设置颜色参数
+                anchors: ['page1', 'page2', 'page3', 'page4'],
+                //定义锚链接
+                menu: '#menu'
+                //绑定菜单，设定的相关属性与 anchors 的值对应后，菜单可以控制滚动
+            });
+        });
+    </script>
+    <style>
+        #menu {
+            margin: 0;
+            padding: 0;
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            list-style-type: none;
+            z-index: 70;
+        }
+
+        #menu li {
+            float: left;
+            margin: 0 10px 0 0;
+            font-size: 14px;
+        }
+
+        #menu a {
+            float: left;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #333;
+            text-decoration: none;
+        }
+
+        #menu .active a {
+            color: #fff;
+            background-color: #333;
+        }
+
+        .section {
+            text-align: center;
+            font: 50px "Microsoft Yahei";
+            color: #fff;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 加导航的可点击 -->
+    <ul id="menu">
+        <li data-menuanchor="page1" class="active">
+            <a href="#page1">第一屏</a>
+        </li>
+        <li data-menuanchor="page2">
+            <a href="#page2">第二屏</a>
+        </li>
+        <li data-menuanchor="page3">
+            <a href="#page3">第三屏</a>
+        </li>
+        <li data-menuanchor="page4">
+            <a href="#page4">第四屏</a>
+        </li>
+    </ul>
+    <!-- 鼠标滚动换 -->
+    <div id="dowebok">
+        <div class="section active">
+            <h3>第一屏</h3>
+            <p>fullPage.js — 绑定菜单演示</p>
+        </div>
+        <div class="section ">
+            <h3>第二屏</h3>
+            <p>请查看左上角，点击可以控制</p>
+        </div>
+        <div class="section">
+            <h3>第三屏</h3>
+            <p>绑定的菜单没有默认的样式，你需要自行编写</p>
+        </div>
+        <div class="section">
+            <h3>第四屏</h3>
+            <p>这是最后一屏</p>
+        </div>
+    </div>
+</body>
+
+</html>

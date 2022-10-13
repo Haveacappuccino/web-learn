@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类操作</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // function fun() {
+    //     //函数内置arguments对象，存储所有传递的参数
+    //     console.log(arguments[2]);
+    // }
+    // fun(1, 2, 3, 4, 5);
+    class Star {
+        constructor(uname, age) {
+            this.uname = uname;
+            this.age = age;
+        }
+        sing(song) {
+            console.log(this.uname + song);
+        }
+    }
+    class Son extends Star {
+        constructor(x, y) {
+            super(x, y);
+            this.x = x;
+            this.y = y;
+        }
+        sing(song) {
+            console.log(this.x + '今年20了');
+            super.sing(song);//调用父亲的sing
+
+        }
+    }
+    var ldh = new Star('刘德华', 18);
+    console.log(ldh);
+    ldh.sing('冰雨');
+    var zxy = new Son('张学友', 20);
+    console.log(zxy);
+    zxy.sing('李香兰');
+
+</script>
+
+</html>

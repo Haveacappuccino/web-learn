@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jQuery.min.js"></script>
+</head>
+
+<body>
+    <div class="father">
+        <p>1</p>
+        <div class="son">
+            2
+        </div>
+    </div>
+    <div class="nav">
+        <p>hello world</p>
+        <div>
+            <p>go out</p>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            console.log($(".son")); //获取类名为 son 的元素
+            console.log($(".father").siblings(".nav"));//亲兄弟
+            $(".nav p").css("background", "red"); //后代选择器
+            $(".nav>p").css("background", "blue");//子代选择器
+            $(".nav").prevAll().css("background", "skyblue");//在自己前面的兄弟
+            $("p:eq(1)").css("width", "200px") //索引为1的p ，索引从0开始
+        })
+    </script>
+</body>
+
+</html>

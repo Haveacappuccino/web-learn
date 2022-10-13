@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        input {
+            border: 1px solid #ccc;
+            color: #ccc;
+            outline: 0;
+        }
+    </style>
+</head>
+<body>
+        <input type="text" value="邮箱">
+    <script>
+        var ipt = document.querySelector('input');
+        ipt.onfocus = function() {
+             if (this.value === '邮箱') {
+                this.value = '';
+             }
+        }
+        ipt.onblur = function() {
+             if (this.value === '') {
+                this.value = '邮箱';
+             }
+        }
+    </script>
+</body>
+</html>

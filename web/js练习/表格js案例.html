@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            margin: 100px auto;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        table,th,td {
+            border: 1px solid #ccc;
+        }
+        thead {
+            background-color: rgb(32, 181, 240);
+        }
+        td {
+            padding: 10px;
+        }
+        .pink {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+             <tr>
+                <th><input type="checkbox" id="boss"></th>
+                <th>姓名</th>
+                <th>手机号</th>
+                <th>邮箱</th>
+             </tr>
+        </thead>
+        <tbody>
+             <tr>
+                <td><input type="checkbox"></td>
+                 <td>王东</td>
+                 <td>15155</td>
+                 <td>1241</td>
+             </tr>
+             <tr>
+                <td><input type="checkbox"></td>
+                <td>王东</td>
+                <td>3515</td>
+                <td>5737</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>王东</td>
+                <td>151513</td>
+                <td>54642</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+         var tbody = document.querySelector('tbody');
+         var trs = tbody.querySelectorAll('tr');
+         var boss = document.getElementById('boss');
+         var j_tbs = tbody.getElementsByTagName('input');
+         for (var i = 0; i < trs.length; i++) {
+            trs[i].onmouseover  = function () {
+                this.className = 'pink';
+              }
+              trs[i].onmouseout  = function () {
+                this.className = '';
+              }
+         }
+         boss.onclick = function () {
+               for (var j = 0; j < j_tbs.length; j++) {
+                j_tbs[j].checked =  this.checked;   //将宗复选框的状态赋给所有复选框
+               }
+           }
+        for (var i = 0;i < j_tbs.length; i++) {
+            j_tbs[i].onclick = function () {
+                var flag = true;
+                for (var j = 0;j < j_tbs.length; j++) {
+                    if (!j_tbs[j].checked) {
+                        flag = false;
+                        break;    //只要有一个未被选中，就退出循环，提高效率
+                    }
+                }
+                boss.checked = flag;
+              }
+        }
+    </script>
+</body>
+</html>

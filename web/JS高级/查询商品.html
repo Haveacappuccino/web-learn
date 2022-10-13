@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        input {
+            width: 70px;
+        }
+
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            padding: 5px 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        按照价格查询：<input id="low" type="text"> - <input id="high" type="text"> <button id="price_search">搜索</button>
+        按照商品名称查询：<input type="text" id="shop">
+        <button id="pname_search">查询</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>产品名称</th>
+                <th>价格</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        var o = {
+            id: '007',
+            name: 'wang',
+            price: 99
+        };
+        var data = [{
+            id: 1,
+            pname: '小米',
+            price: 3999
+        }, {
+            id: 2,
+            pname: 'vivo',
+            price: 2999
+        }, {
+            id: 3,
+            pname: 'oppo',
+            price: 1999
+        }, {
+            id: 4,
+            pname: '华为',
+            price: 999
+        }];
+        var tbody = document.querySelector('tbody');
+        var low = document.querySelector('#low');
+        var high = document.querySelector('#high');
+        var shop = document.querySelector('#shop');
+        var price_search = document.querySelector("#price_search");
+        var pname_search = document.querySelector("#pname_search");
+        function display(data) {
+            tbody.innerHTML = '';
+            data.forEach(function (value, i, self) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + value.id + '</td><td>' + value.pname + '</td><td>' + value.price + '</td>'
+                // for (var k in value) {
+                //     var td = document.createElement("td");
+                //     td.innerText = value[k];
+                //     tr.appendChild(td);
+                // }
+                tbody.appendChild(tr);
+            })
+        }
+        display(data);
+        price_search.addEventListener('click', function () {
+            var newData = data.filter(function (value, i, self) {
+                return value.price >= low.value && value.price <= high.value;
+            })
+            display(newData);
+        })
+        pname_search.addEventListener('click', function () {
+            console.log(shop.value);
+            var newData = data.filter(function (val) {
+                return (val.pname).indexOf(shop.value) != -1;
+            })
+            display(newData);
+        })
+        Object.defineProperty(o, 'price', {
+            //对象原有属性
+            value: 1000,
+            // writable: true,  //默认true可修改，
+            // enumerable: true,//默认true可枚举 
+            // configurable: true//默认true可删除或再次修改 
+        })
+        Object.defineProperty(o, 'num', {
+            //新增属性
+            value: 1,
+            // writable: true,  //默认false,不可修改value值
+            // enumerable: true,// 默认false,num属性不可被遍历
+            configurable: true// 默认false,不可删除num属性或修改其他特性
+        })
+        // Object.defineProperty(o, 'num', {
+        //     //新增属性
+        //     value: 5,
+        //     // writable: true,  //默认false不可修改
+        //     // enumerable: true,// 默认false不可枚举
+        //     // configurable: true// 默认false不可删除或再次修改
+        // })
+        o.price = 999;
+        console.log(o);
+        var arr1 = Object.keys(o);//遍历对象属性名，返回数组
+        console.log(arr1);
+        // var arr2 = [1, 2, 3, 4, 5];
+        // delete arr2[4];//造成数组元素空缺，长度不变
+        // console.log(arr2);
+        // delete o.num;//删除属性
+        // delete o.price;
+        console.log(o.__proto__);
+    </script>
+</body>
+
+</html>

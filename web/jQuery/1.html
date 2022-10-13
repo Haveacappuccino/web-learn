@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jQuery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 20px;
+        }
+
+        @keyframes show {
+
+            0%,
+            50%,
+            100% {
+                transform: rotateX(0deg);
+            }
+
+            25% {
+                transform: rotateX(-30deg);
+            }
+
+            75% {
+                transform: rotateX(30deg);
+            }
+        }
+
+        li {
+            list-style: none;
+        }
+
+        body {
+            background: linear-gradient(to right, #ffb0bc, #ffc3a1);
+        }
+
+        section {
+            width: 440px;
+            margin: 100px auto;
+            padding: 25px 40px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .head {
+            height: 130px;
+        }
+
+        section>p {
+            text-align: center;
+            font-weight: 700;
+            color: #494a4b;
+        }
+
+        .search {
+            margin: 10px 0 50px 0;
+        }
+
+        .search input {
+            outline: 0;
+            margin-top: 20px;
+            height: 30px;
+            width: 250px;
+            border: 0;
+            border-bottom: #fe7345;
+            border-style: dashed;
+        }
+
+        .search .behind button {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 86px;
+            height: 37px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            transform: translateY(-3px);
+            transition: all .2s;
+        }
+
+        .search .behind {
+            position: relative;
+            display: inline-block;
+            width: 86px;
+            height: 37px;
+            border-radius: 5px;
+            vertical-align: middle;
+            transform: translateY(-3px) rotate(3deg);
+            background-color: red;
+            transition: all .2s;
+        }
+
+        .down {
+            transform: translateY(0px) rotate(0deg) !important;
+        }
+
+        .main {
+            /* display: none; */
+            transform-style: preserve-3d;
+            perspective: 500px;
+            margin-bottom: 50px;
+        }
+
+        .main li {
+            list-style: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+            /* animation: show .5s; */
+        }
+
+        input[type='checkbox'] {
+            cursor: pointer;
+            position: relative;
+            width: 15px;
+            height: 15px;
+            font-size: 14px;
+        }
+
+        input[type='checkbox']::after {
+            position: absolute;
+            top: 0;
+            background-color: white;
+            color: #000;
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            text-align: center;
+            content: ' ';
+            box-sizing: border-box;
+            border: 1px solid black;
+        }
+
+        input[type='checkbox']:checked::after {
+            content: '✓';
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff !important;
+            background-color: #fe7345 !important;
+            border: 0;
+        }
+
+        .main li a {
+            float: right;
+            margin-right: 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .main li a:hover {
+            color: #ccc;
+        }
+
+        .main li input {
+            margin-right: 5px;
+        }
+
+        footer p {
+            font-size: 16px;
+        }
+
+        footer p {
+            text-align: center;
+            color: #ccc;
+        }
+
+        .total {
+            display: none;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .total li {
+            text-align: center;
+            font-size: 16px;
+            float: left;
+            margin: 0 5px;
+
+        }
+
+        .num {
+            margin-left: -8px;
+        }
+
+        .total li a {
+            padding: 5px;
+            border-radius: 6px;
+            font-size: 16px;
+            text-decoration: none;
+            color: #000;
+
+            border: 1px solid #ccc;
+        }
+
+        .total li a:hover,
+        .current {
+            background-color: #fe7345 !important;
+            color: #fff !important;
+        }
+
+        .total li:last-child {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="head"></div>
+        <p>~ Today I need to ~</p>
+        <div class="search">
+            <input class="input" type="text" placeholder="Add new todo...">
+            <div class="behind"><button class="submit">Submit</button></div>
+        </div>
+        <ul class="main">
+        </ul>
+        <footer>
+            <p class="footer">Congrat, you have no more tasks to do</p>
+            <!-- tab栏 -->
+            <ul class="total">
+                <li>
+                    <!-- 计数 -->
+                    <div class="num">0</div> item left
+                </li>
+                <li><a class="all current" href="javascript:;">All</a></li>
+                <li><a class="active" href="javascript:;">Active</a></li>
+                <li><a class="completed" href="javascript:;">Completed</a></li>
+                <li><a class="clear" href="javascript:;">Clear Completed</a></li>
+            </ul>
+        </footer>
+    </section>
+    <script>
+        $(function () {
+            //读取数据
+            function getData() {
+                var data = localStorage.getItem("todoList");
+                if (data !== null) {
+                    $(".footer").hide().siblings(".total").show();
+                    if (data == '[]') {
+                        $(".footer").show().siblings(".total").hide();
+                    }
+                    return JSON.parse(data);//字符串转数组
+                } else {
+                    return [];
+                }
+            }
+            //存储数据
+            function saveData(local) {
+                localStorage.setItem("todoList", JSON.stringify(local));
+            }
+
+            //把本地存储的数据加载到页面
+            function load(s) {
+                if (s == 3) {
+                    saveData("[]");
+                    return false;
+                }
+                $(".main").empty();
+                var date = getData();
+                $.each(date, function (i, dom) {
+                    $(".main").prepend('<li index = ' + i + '><input class="check" type="checkbox">' + dom.title + '<a class="del" href="javascript:;">X</a></li>');
+                    if (!s) {
+                        if (dom.done) {
+                            //动态生成，后创建的放在最前面，所以索引0是最新生成的li
+                            $(".main li").eq(0).css({
+                                animation: "show .5s",
+                                textDecoration: "line-through"
+                            }).addClass("current").children(".del").addClass("current");
+                            $(".main li").eq(0).children(".check").prop("checked", true);
+
+                        }
+                    } else if (s == 1) {
+                        if (dom.done) {
+                            $(".main li").eq(0).hide();
+                        }
+                    } else if (s == 2) {
+                        if (!dom.done) {
+                            $(".main li").eq(0).hide();
+                        }
+                        else {
+                            $(".main li").eq(0).css({
+                                animation: "show .5s",
+                                textDecoration: "line-through"
+                            }).addClass("current").children(".del").addClass("current");
+                            $(".main li").eq(0).children(".check").prop("checked", true);
+                        }
+                    }
+                })
+            }
+            //计数
+            function count() {
+                console.log($(".check").length);
+                console.log();
+                var num = $(".check").length - $(".check:checked").length;
+                $(".num").text(num);
+            }
+            //初始刷新页面
+            load();
+            count();
+            //提交按钮事件
+            $(".submit").on({
+                "mousedown mouseup": function () {
+                    $(this).toggleClass("down").parent().toggleClass("down");
+                },
+                click: function () {
+                    if ($(".input").val() == '') {
+                        $(".input").focus();
+                        return false;
+                    }
+                    var local = getData();
+                    local.push({
+                        title: $(".input").val(),
+                        done: false
+                    })
+                    saveData(local);
+                    load();
+                    count();
+                    $(".input").val("").focus();
+                }
+            })
+
+            //li复选框事件
+            $(".main").on("change", ".check", function () {  //后创建的元素用这种方法绑定事件on +（事件委托）
+                // console.log($(this).prop("checked"));
+                var date = getData();
+                date[$(this).parent().attr("index")].done = $(this).prop("checked");
+                // console.log(date[$(this).parent().attr("index")].done);
+                saveData(date);
+                //复选框选中动画
+                $(this).parent().fadeIn(500).css({
+                    animation: "",
+                    textDecoration: ""
+                })
+                if ($(this).prop("checked")) {
+                    $(this).parent().hide().fadeIn(500).css({
+                        animation: "show .5s",
+                        textDecoration: "line-through"
+                    });
+                }
+                $(this).parent("li").toggleClass("current").children(".del").toggleClass("current");
+                count();
+            })
+
+            //回车键
+            $(window).on("keydown", function (e) {
+                if (e.keyCode == 13) {
+                    $(".submit").click();
+                }
+            })
+
+            //底部切换
+            $(".total").on("click", "a", function () {
+                $(this).addClass("current").parent().siblings().children("a").removeClass("current");
+            })
+
+            //删除
+            $(".main").on("click", ".del", function () {
+                var data1 = getData();
+                // console.log($(this).parent().attr("index"));
+                data1.splice($(this).parent().attr("index"), 1);
+                // console.log(data1);
+                saveData(data1);
+                load();
+                count();
+            })
+
+            $(".all").click(function () {
+                load();
+                count();
+            })
+            $(".active").click(function () {
+                load(1);
+                count();
+
+            })
+            $(".completed").click(function () {
+                load(2);
+                count();
+
+            })
+            $(".clear").click(function () {
+                load(3);
+                count();
+
+            })
+        })
+    </script>
+</body>
+
+</html>

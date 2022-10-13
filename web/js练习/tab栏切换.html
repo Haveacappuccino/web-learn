@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            height: 50px;
+            border: 1px solid rgb(233, 29, 14);
+        }
+          ul li {
+            display: inline-block;
+            line-height: 50px;
+            list-style: none;
+            padding: 0 15px;
+            cursor: pointer;
+          }
+          .check {
+            background-color: rgb(237, 57, 57);
+            color: #fff;
+          }
+          
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li class="check">商品介绍</li>
+            <li>商品详情</li>
+            <li>评价</li>
+        </ul>
+    </div>
+    <div class="items">
+        <div style="display: block;">商品介绍模块</div>
+        <div style="display: none;">商品详情模块</div>
+        <div style="display: none;">评价模块</div>
+    </div>
+     <script>
+         var items= document.querySelector('.items').querySelectorAll('div');
+         var box_li = document.querySelector('.box').querySelectorAll('li');
+         for (var i = 0;i <box_li.length;i++) {
+            box_li[i].setAttribute('index',i);
+            box_li[i].onclick = function() {
+                for (var i = 0;i <box_li.length;i++) {
+                    box_li[i].className = '';
+                }
+                this.className = 'check';
+                var index = this.getAttribute('index');
+                console.log(index);
+                for (var i = 0;i <items.length;i++) {
+                    items[i].style.display = 'none';
+                }
+                items[index].style.display = 'block';
+                
+            }
+         }
+     </script>
+</body>
+</html>

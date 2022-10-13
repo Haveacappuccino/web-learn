@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            width: 500px;
+            margin: 100px auto;
+        }
+        .dis {
+            display: none;
+            position: absolute;
+            top: -40px;
+            width: 200px;
+            height: 30px;
+            margin-bottom: 8px;
+            font-size: 18px;
+            line-height: 30px;
+            border: 1px solid #ccc;
+            box-shadow: 0 1px 1px 1px #ccc;
+        }
+
+        .move {
+            position: relative;
+            top: 100%;
+            left: 10px;
+            width: 0;
+            height: 0;
+            border: 7px solid transparent;
+            border-top-color: #fff;
+        }
+
+        input {
+            outline: 0;
+            width: 196px;
+            height: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="dis">
+            <div class="move"></div>
+        </div>
+        <input type="text">
+    </div>
+    <script>
+        var ipt = document.querySelector('input');
+        var dis = document.querySelector('.dis');
+        ipt.addEventListener('keyup',function (e) {
+            if(this.value == '') {
+                this.previousElementSibling.style.display = 'none';
+            }else {
+                dis.innerHTML = ipt.value;
+                dis.style.display = 'block';
+            }
+          })
+        ipt.addEventListener('blur',function (e) {
+            dis.style.display = 'none';
+          })
+          ipt.addEventListener('focus',function (e) {
+            if(this.value != '') {
+                dis.style.display = 'block';
+            }
+            })
+          
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+.tou {
+    padding: 15px 0 10px 0;
+    border-bottom: 2px solid #b3191b;
+}
+
+.zhuce {
+    height: 520px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+}
+
+.zhuce_top {
+    height: 40px;
+    padding: 0 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #ececec;
+    line-height: 40px;
+}
+
+.zhuce_top p {
+    float: left;
+    font-size: 18px;
+}
+
+.zhuce_top span {
+    float: right;
+    font-size: 14px;
+}
+
+.zhuce_top span a {
+    color: red;
+}
+
+.zhuce_bottom {
+
+    width: 600px;
+    margin: 50px auto 0;
+}
+
+.zhuce_bottom ul li {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    font-size: 14px;
+    text-align: right;
+}
+
+.zhuce_bottom ul li input {
+    width: 240px;
+    height: 35px;
+    border: 1px solid #ccc;
+}
+
+.zhuce_bottom li>span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 57%;
+    display: flex;
+    align-items: center;
+}
+
+.error {
+    color: #ea282c;
+}
+
+.error::before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    margin: -1px 3px;
+    background: url(../images/error.png) no-repeat;
+}
+
+.safe {
+    margin-left: 160px;
+}
+
+.zhuce_bottom .safe span {
+    padding: 0 12px;
+    margin-left: 2px;
+    color: #fff;
+}
+
+.ruo {
+    background-color: red;
+}
+
+.zhong {
+    background-color: rgb(18, 237, 18);
+}
+
+.qiang {
+    background-color: orange;
+}
+
+.agree {
+    margin-left: 100px;
+}
+
+.zhuce_bottom .agree input {
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+}
+
+.agree a {
+    margin: 0 10px;
+    color: rgb(15, 176, 251);
+}
+
+.complish {
+    margin: 50px 0 0 120px;
+}
+
+.zhuce_bottom .complish input {
+    width: 200px;
+    height: 35px;
+    color: #fff;
+    background-color: #b3191b;
+}
